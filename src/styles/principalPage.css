@@ -1,0 +1,95 @@
+.logoPrincipal {
+    width: 120px;
+    height: 100px;
+}
+
+.logoLogout {
+    width: 75px;
+    height: 75px;
+    margin-right: 2%;
+}
+
+.logoLogin {
+    width: 75px;
+    height: 75px;
+    margin-right: 2%;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.flex-container {
+    display: flex;
+    max-width: 80%;
+    margin: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+  
+.flex-items:nth-child(1) {
+    display: flex;
+    width: 40%;
+    background-color: #EEEEEE;
+    border-radius: 25px;
+    margin-right: 2%;
+    margin-bottom: 2%;
+}
+  
+.flex-items:nth-child(2) {
+    display: flex;
+    width: 40%;
+    background-color: #EEEEEE;
+    border-radius: 25px;
+    margin-left: 2%;
+    margin-bottom: 2%;
+}
+  
+.flex-items:nth-child(3) {
+    display: flex;
+    width: 40%;
+    background-color: #EEEEEE;
+    border-radius: 25px;
+    margin-right: 2%;
+}
+  
+.flex-items:nth-child(4) {
+    display: flex;
+    width: 40%;
+    background-color: #EEEEEE;
+    border-radius: 25px;
+    margin-left: 2%;
+}
+
+.flex-message {
+    display: flex;
+    max-width: 80%;
+    margin: auto auto 4% auto;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.flex-message > p {
+    font-size: 20px;
+}
+
+.flex-mssgItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+}
+
+.flex-mssgItem > img {
+    width: 5%;
+}
+
+.flex-mssgItem > p {
+    font-size: 20px;
+}

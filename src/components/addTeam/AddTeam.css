@@ -1,0 +1,16 @@
+.add-team {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 20px 0;
+    overflow: hidden;
+  }
+  
+  .add-team-header, .add-team-footer {
+    background-color: #f5f5f5;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .add-team-body {
+    padding: 20px;
+  }
