@@ -1,6 +1,3 @@
-// import Header from './Header';
-// import Body from './Body';
-// import './AddTeam.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -8,6 +5,7 @@ const AddTeam = () => {
   const [nombreEquipo, setNombreEquipo] = useState('');
   const [categoria, setCategoria] = useState('');
   const [categorias, setCategorias] = useState([]);
+  const [foto, setFoto] = useState(null);
 
   useEffect(() => {
     // Obtener las categorías de la API
@@ -20,18 +18,27 @@ const AddTeam = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    console.log('Nombre del equipo:', nombreEquipo);
+    console.log('ID de la categoría seleccionada:', categoria);
+    console.log('Imagen:', foto);
+
     try {
-      // Aquí puedes manejar la lógica para subir la imagen al backend
       const formData = new FormData();
       formData.append('name', nombreEquipo);
-      formData.append('category', categoria);
-      formData.append('image', /* Aquí va la imagen */);
-
-      await axios.post('/api/teams', formData);
-      alert('Equipo creado correctamente');
+      formData.append('league_id', categoria);
+      formData.append('image', foto);
+  
+      const response = await axios.post('http://localhost:5000/api/teams', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      
+      console.log('Equipo creado correctamente:', response.data);
+      // Aquí podrías mostrar algún mensaje de éxito al usuario
     } catch (error) {
       console.error('Error al crear el equipo:', error);
-      alert('Error al crear el equipo');
+      // Aquí podrías mostrar algún mensaje de error al usuario
     }
   };
 
@@ -39,21 +46,37 @@ const AddTeam = () => {
     <form onSubmit={handleSubmit}>
       <label>
         Nombre del Equipo:
-        <input type="text" value={nombreEquipo} onChange={e => setNombreEquipo(e.target.value)} />
+        <input 
+          type="text" 
+          value={nombreEquipo} 
+          onChange={e => setNombreEquipo(e.target.value)} 
+          required
+        />
       </label>
+      <br />
       <label>
         Categoría:
-        <select value={categoria} onChange={e => setCategoria(e.target.value)}>
+        <select 
+          value={categoria} 
+          onChange={e => setCategoria(e.target.value)}
+          required
+        >
           <option value="">Selecciona una categoría</option>
           {categorias.map(c => (
-            <option key={c.id_league} value={c.name}>{c.name}</option>
+            <option key={c.id_league} value={c.id_league}>{c.name}</option>
           ))}
         </select>
       </label>
+      <br />
       <label>
         Foto:
-        <input type="file" accept="image/*" />
+        <input 
+          type="file" 
+          accept="image/*" 
+          onChange={e => setFoto(e.target.files[0])} 
+        />
       </label>
+      <br />
       <button type="submit">Crear Equipo</button>
     </form>
   );
