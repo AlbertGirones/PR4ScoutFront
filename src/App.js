@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './components/HomePage';
-import AddPlayer from './components/Player/AddPlayer';
+import AddPlayer from './components/Player/AddPlayerPage';
 import AddTeam from './components/Team/AddTeam';
 
 
