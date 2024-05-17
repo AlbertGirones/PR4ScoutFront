@@ -7,7 +7,12 @@ const AddPlayer = () => {
   const [description, setDescription] = useState('');
   const [team, setTeam] = useState('');
   const [teams, setTeams] = useState([]);
+  const [position, setPosition] = useState('');
   const [image, setImage] = useState(null);
+
+  const positions = [
+    'POR', 'DFC', 'LD/CAD', 'LI/CAI', 'MCD', 'MC', 'MI', 'MD', 'MP', 'EI', 'ED', 'SD', 'DC'
+  ];
 
   useEffect(() => {
     axios.get('/api/teams')
@@ -26,6 +31,7 @@ const AddPlayer = () => {
       formData.append('name', name);
       formData.append('description', description);
       formData.append('team', team);
+      formData.append('position', position);
       formData.append('image', image);
       console.log(formData);
       const response = await axios.post('http://localhost:5000/api/players', formData, {
@@ -80,6 +86,20 @@ const AddPlayer = () => {
           <option value="">Selecciona un equipo</option>
           {teams.map(t => (
             <option key={t.id_team} value={t.id_team}>{t.name}</option>
+          ))}
+        </select>
+      </label>
+      <br />
+      <label>
+        Posicion:
+        <select
+          value={position}
+          onChange={e => setPosition(e.target.value)}
+          required
+        >
+          <option value="">Selecciona una posicion</option>
+          {positions.map(pos => (
+            <option key={pos} value={pos}>{pos}</option>
           ))}
         </select>
       </label>
