@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './components/HomePage';
-import AddTeam from './components/addTeam/AddTeam';
+import AddPlayer from './components/Player/AddPlayer';
+import AddTeam from './components/Team/AddTeam';
+
 
 function App() {
   return (
@@ -8,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/add-team" element={<AddTeam />} />
+        <Route path="/add-player" element={<AddPlayer />} />
       </Routes>
     </Router>
   );
