@@ -70,67 +70,47 @@ const AddPlayer = () => {
         <div class="inputContainer">
           <input 
             type="text" class="input" placeholder='a'
-            value={name} 
-            onChange={e => setName(e.target.value)} 
+            value={description} 
+            onChange={e => setDescription(e.target.value)} 
             required
           />
-          <label>Nombre</label>
+          <label>Descripción</label>
         </div>
-        <div>
-          <label>
-            Descripción:
-            <textarea 
-              value={description} 
-              onChange={e => setDescription(e.target.value)} 
-              required
-            />
-          </label>
+        <div class="inputContainerSelect">
+          <select 
+            value={team} 
+            onChange={e => setTeam(e.target.value)}
+            required
+          >
+            <option value="">Selecciona un equipo</option>
+            {teams.map(t => (
+              <option key={t.id_team} value={t.id_team}>{t.name}</option>
+            ))}
+          </select>
         </div>
-        <div>
-          <label>
-            Equipo:
-            <select 
-              value={team} 
-              onChange={e => setTeam(e.target.value)}
-              required
-            >
-              <option value="">Selecciona un equipo</option>
-              {teams.map(t => (
-                <option key={t.id_team} value={t.id_team}>{t.name}</option>
-              ))}
-            </select>
-          </label>
+        <div class="inputContainerSelect">
+          <select
+            value={position}
+            onChange={e => setPosition(e.target.value)}
+            required
+          >
+            <option value="">Selecciona una posicion</option>
+            {positions.map(pos => (
+              <option key={pos} value={pos}>{pos}</option>
+            ))}
+          </select>
         </div>
-        <div>
-          <label>
-            Posicion:
-            <select
-              value={position}
-              onChange={e => setPosition(e.target.value)}
-              required
-            >
-              <option value="">Selecciona una posicion</option>
-              {positions.map(pos => (
-                <option key={pos} value={pos}>{pos}</option>
-              ))}
-            </select>
-          </label>
-        </div>
-        <div>
-          <label>
-            Imagen:
-            <input 
-              type="file" 
-              accept="image/*" 
-              onChange={e => setImage(e.target.files[0])} 
-              required
-            />
-          </label>
+        <div class="inputContainerSelect">
+          <input 
+            type="file" 
+            accept="image/*" 
+            onChange={e => setImage(e.target.files[0])} 
+            required
+          />
         </div>
         <button class="submitBtn" type="submit">Crear Jugador</button>
       </form>
     </div>
-    
   );
 };
 

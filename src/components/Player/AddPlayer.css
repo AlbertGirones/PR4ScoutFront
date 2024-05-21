@@ -94,11 +94,19 @@
     border: 2px solid rgb(24, 117, 0);
 }
 
-.input:focus + .label {
-    top: -7px;
-    left: 3px;
-    font-size: 14px;
-    font-weight: 600;
-    color: rgb(24, 117, 0);
-    z-index: 10;
+.inputContainerSelect {
+    position: relative;
+    height: 50px;
+    width: 80%;
+    margin-bottom: 17px;
+}
+
+.inputContainerSelect > select {
+    height: 100%;
+    width: 100%;
+}
+
+.inputContainerSelect > input {
+    height: 100%;
+    width: 100%;
 }

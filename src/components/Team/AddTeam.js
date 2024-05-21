@@ -43,42 +43,40 @@ const AddTeam = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Nombre del Equipo:
-        <input 
-          type="text" 
-          value={nombreEquipo} 
-          onChange={e => setNombreEquipo(e.target.value)} 
-          required
-        />
-      </label>
-      <br />
-      <label>
-        Categoría:
-        <select 
-          value={categoria} 
-          onChange={e => setCategoria(e.target.value)}
-          required
-        >
-          <option value="">Selecciona una categoría</option>
-          {categorias.map(c => (
-            <option key={c.id_league} value={c.id_league}>{c.name}</option>
-          ))}
-        </select>
-      </label>
-      <br />
-      <label>
-        Foto:
-        <input 
-          type="file" 
-          accept="image/*" 
-          onChange={e => setFoto(e.target.files[0])} 
-        />
-      </label>
-      <br />
-      <button type="submit">Crear Equipo</button>
-    </form>
+    <div class="flex-containerAddTeam">
+      <h1>Insertar equipo</h1>
+      <form onSubmit={handleSubmit}>
+        <div class="inputContainer">
+          <input 
+            type="text" 
+            value={nombreEquipo} 
+            onChange={e => setNombreEquipo(e.target.value)} 
+            required
+          />
+          <label>Nombre del Equipo:</label>
+        </div>
+        <div class="inputContainerSelect">
+          <select 
+            value={categoria} 
+            onChange={e => setCategoria(e.target.value)}
+            required
+          >
+            <option value="">Selecciona una categoría</option>
+            {categorias.map(c => (
+              <option key={c.id_league} value={c.id_league}>{c.name}</option>
+            ))}
+          </select>
+        </div>
+        <div class="inputContainerSelect">
+          <input 
+            type="file" 
+            accept="image/*" 
+            onChange={e => setFoto(e.target.files[0])} 
+          />
+        </div>
+        <button type="submit">Crear Equipo</button>
+      </form>
+    </div>
   );
 };
 
