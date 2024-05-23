@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import authService from '../../services/authService'; // Asegúrate de importar authService
 import '../../styles/principalPage.css';
@@ -41,9 +40,6 @@ const Body = () => {
         <div className="flex-items">Este DIV es el de MIS RIVALES</div>
       </div>
 
-      <Link to="/add-team">Crear equipo</Link>
-      <Link to="/add-player">Crear jugador</Link>
-      <Link to="/logout">Logout</Link>
       {/* {data.length > 0 && <Link to={`/team-matches/${data[0].clubId}`}>Agregar partidos</Link>} */}
     </main>
   );

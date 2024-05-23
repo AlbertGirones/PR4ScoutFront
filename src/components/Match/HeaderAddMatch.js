@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../img/logoPrincipal.png';
-import logoutLogo from '../../img/logoutLogo.svg';
-import loginLogo from '../../img/login.svg';
+import backLogo from '../../img/back.svg';
 import authService from '../../services/authService';
 import axios from 'axios';
 import '../../styles/principalPage.css';
@@ -26,14 +25,12 @@ const Header = () => {
   return (
     <header>
       <nav className="container">
-        <img className="logoPrincipal" src={logo} alt="Logo principal" />
-        {currentUser ? (
-          <div className="navLinks">
-            <><Link to="/add-team" className="Link">Crear equipo</Link><Link to="/add-player" className="Link">Crear jugador</Link><Link to="/add-league" className="Link">Añadir liga</Link><Link to={`/addMatchScreen/${teamId}`} className="Link">Añadir jornadas</Link><Link to="/logout" className="LinkLogoLogout"><img className="logoLogout" src={logoutLogo} alt="Logout" /></Link></>
-          </div>
-        ) : (
-          <img className="logoLogin" src={loginLogo} alt="Login" />
-        )}
+        <Link to="/">
+          <img className="logoPrincipal" src={logo} alt="Logo principal" />
+        </Link>
+        <Link to={`/addMatchScreen/${teamId}`}>
+          <img className="logoBack" src={backLogo} alt="Tornar ..." />
+        </Link>
       </nav>
     </header>
   );

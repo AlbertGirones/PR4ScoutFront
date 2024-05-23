@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddTeam = () => {
   const [nombreEquipo, setNombreEquipo] = useState('');
   const [categoria, setCategoria] = useState('');
   const [categorias, setCategorias] = useState([]);
   const [foto, setFoto] = useState(null);
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     // Obtener las categorías de la API
@@ -18,9 +21,6 @@ const AddTeam = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    console.log('Nombre del equipo:', nombreEquipo);
-    console.log('ID de la categoría seleccionada:', categoria);
-    console.log('Imagen:', foto);
 
     try {
       const formData = new FormData();
@@ -33,29 +33,51 @@ const AddTeam = () => {
           'Content-Type': 'multipart/form-data'
         }
       });
-      
-      console.log('Equipo creado correctamente:', response.data);
-      // Aquí podrías mostrar algún mensaje de éxito al usuario
+
+      if (response.status === 200) {
+        toast.success('Equipo creado correctamente', {
+          autoClose: 1500,
+          onClose: () => resetForm()
+        });
+        console.log('Equipo creado correctamente:', response.data);
+      }
     } catch (error) {
+      if (error.response && error.response.data && error.response.data.error) {
+        toast.error(error.response.data.error, {
+          autoClose: 3000
+        });
+      } else {
+        toast.error('Error al crear el equipo', {
+          autoClose: 3000
+        });
+      }
       console.error('Error al crear el equipo:', error);
-      // Aquí podrías mostrar algún mensaje de error al usuario
+    }
+  };
+
+  const resetForm = () => {
+    setNombreEquipo('');
+    setCategoria('');
+    setFoto(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
     }
   };
 
   return (
-    <div class="flex-containerAddTeam">
+    <div className="flex-containerAddTeam">
       <h1>Insertar equipo</h1>
       <form onSubmit={handleSubmit}>
-        <div class="inputContainer">
+        <div className="inputContainer">
           <input 
-            type="text" 
+            type="text" className="input" placeholder='Nombre del equipo'
             value={nombreEquipo} 
             onChange={e => setNombreEquipo(e.target.value)} 
             required
           />
           <label>Nombre del Equipo:</label>
         </div>
-        <div class="inputContainerSelect">
+        <div className="inputContainerSelect">
           <select 
             value={categoria} 
             onChange={e => setCategoria(e.target.value)}
@@ -67,15 +89,18 @@ const AddTeam = () => {
             ))}
           </select>
         </div>
-        <div class="inputContainerSelect">
+        <div className="inputContainerSelect">
           <input 
             type="file" 
             accept="image/*" 
             onChange={e => setFoto(e.target.files[0])} 
+            ref={fileInputRef}
+            required
           />
         </div>
-        <button type="submit">Crear Equipo</button>
+        <button className="submitBtn" type="submit">Crear Equipo</button>
       </form>
+      <ToastContainer />
     </div>
   );
 };

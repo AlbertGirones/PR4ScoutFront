@@ -1,4 +1,4 @@
-.flex-containerAddPLayer {
+.flex-containerAddLeague {
     display: flex;
     width: 80%;
     margin: 1% 10% 1% 10%;
@@ -12,13 +12,13 @@
     align-content: center;
 }
 
-.flex-containerAddPLayer > h1 {
+.flex-containerAddLeague > h1 {
     padding: 1%;
     font-size: 35px;
     margin-bottom: 1%;
 }
 
-.flex-containerAddPLayer > form {
+.flex-containerAddLeague > form {
     padding: 1%;
     width: 400px;
     padding: 20px 40px;
