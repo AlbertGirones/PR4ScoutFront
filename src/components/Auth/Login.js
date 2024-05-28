@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import authService from '../../services/authService';
+import logo from "../../img/logoPrincipal.png"
 import "./login.css";
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -15,7 +17,7 @@ const Login = () => {
             await authService.login(email, password);
             navigate('/');
         } catch (err) {
-            setError('Error al iniciar sesión. Verifica tus credenciales.');
+            toast.error('Error al iniciar sesión. Verifica tus credenciales.');
         }
     };
 
@@ -35,14 +37,16 @@ const Login = () => {
                     <div className='inputContainer'>
                         <button type="submit">Iniciar sesión</button>
                     </div>
-                    {error && <div className="error">{error}</div>}
+                    <Link to="/register">
+                        <p className='Link'>¿No tienes una cuenta? Registrate!</p>
+                    </Link>
                 </form>
             </div>
             <div className='formContainer'>
-                <img src=""></img>
+                <img src={logo} alt="Logo" />
             </div>
+            <ToastContainer />
         </div>
-        
     );
 };
 

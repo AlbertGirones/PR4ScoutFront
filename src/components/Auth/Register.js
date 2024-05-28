@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import authService from '../../services/authService';
+import logo from "../../img/logoPrincipal.png";
+import "./register.css";
 
 const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
-    const [message, setMessage] = useState('');
     const navigate = useNavigate();
 
     const handleRegister = async (e) => {
@@ -15,34 +18,47 @@ const Register = () => {
 
         try {
             await authService.register(email, password, name, surname);
-            setMessage('Usuario registrado exitosamente');
-            navigate('/login'); // Redirigir al usuario a la página de inicio de sesión después del registro exitoso
+            navigate('/login');
         } catch (error) {
-            setMessage('Error al registrar el usuario');
+            if (error.response && error.response.status === 400) {
+                toast.error('El correo ya está en uso.');
+            } else {
+                toast.error('Error al registrarse. Modifica las credenciales.');
+            }
         }
     };
 
     return (
-        <form onSubmit={handleRegister}>
-            <div>
-                <label>Email</label>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <div className='flexContainerLogin'>
+            <div className='formContainer'>
+                <form onSubmit={handleRegister}>
+                    <h1 className='h1Hame'>REGISTER</h1>
+                    <div className='inputContainer'>
+                        <label>Email</label>
+                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    </div>
+                    <div className='inputContainer'>
+                        <label>Password</label>
+                        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    </div>
+                    <div className='inputContainer'>
+                        <label>Nombre</label>
+                        <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+                    </div>
+                    <div className='inputContainer'>
+                        <label>Apellido</label>
+                        <input type="text" value={surname} onChange={(e) => setSurname(e.target.value)} required />
+                    </div>
+                    <div className='inputContainer'>
+                        <button type="submit">Registrarse</button>
+                    </div>
+                </form>
             </div>
-            <div>
-                <label>Password</label>
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <div className='formContainer'>
+                <img src={logo} alt="Logo" />
             </div>
-            <div>
-                <label>Nombre</label>
-                <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-            </div>
-            <div>
-                <label>Apellido</label>
-                <input type="text" value={surname} onChange={(e) => setSurname(e.target.value)} />
-            </div>
-            <button type="submit">Registrarse</button>
-            {message && <div>{message}</div>}
-        </form>
+            <ToastContainer />
+        </div>
     );
 };
 
