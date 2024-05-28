@@ -49,8 +49,8 @@
 
 .flex-container {
     display: flex;
-    max-width: 80%;
-    margin: auto;
+    max-width: 90%;
+    margin: 0 auto 5% auto;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
@@ -60,15 +60,95 @@
   
 .flex-items:nth-child(1) {
     display: flex;
+    flex-direction: column;
     width: 40%;
     background-color: #EEEEEE;
     border-radius: 25px;
     margin-right: 2%;
     margin-bottom: 2%;
 }
+
+.flex-items:nth-child(1) > h2{
+    margin-left: 3%;
+}
+
+.childContentDiv {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 2%;
+}
+
+.escudo{
+    width: 7%;
+    margin-left: 3%;
+    margin-right: 2%;
+}
+
+.onep {
+    width: 25%;
+}
+
+.twop {
+    width: 9%;
+}
+
+.trep {
+    width: 9%;
+}
+
+.lv {
+    width: 7%;
+}
+
+.resultN {
+    text-align: center;
+    width: 7%;
+    margin-right: 3%;
+}
+
+.resultY {
+    background-color: #ffc038;
+    font-weight: bold;
+    border-radius: 3px;
+    text-align: center;
+    width: 7%;
+    margin-right: 3%;
+}
   
+.namePlayer {
+    width: 50%;
+}
+
+.position {
+    width: 20%;
+    text-align: center;
+}
+
+.namePlayer2 {
+    width: 63%;
+}
+
+.position2 {
+    width: 20%;
+    text-align: center;
+}
+
+.fotoPlayer {
+    width: 9%;
+    margin-left: 3%;
+    margin-right: 2%;
+}
+
+.title {
+    margin-left: 3%;
+}
 .flex-items:nth-child(2) {
     display: flex;
+    flex-direction: column;
     width: 40%;
     background-color: #EEEEEE;
     border-radius: 25px;
@@ -78,6 +158,7 @@
   
 .flex-items:nth-child(3) {
     display: flex;
+    flex-direction: column;
     width: 40%;
     background-color: #EEEEEE;
     border-radius: 25px;
@@ -86,6 +167,7 @@
   
 .flex-items:nth-child(4) {
     display: flex;
+    flex-direction: column;
     width: 40%;
     background-color: #EEEEEE;
     border-radius: 25px;

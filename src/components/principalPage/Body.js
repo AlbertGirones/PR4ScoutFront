@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import authService from '../../services/authService';
+import logoLocal from '../../img/house-svgrepo-com.svg';
+import logoVisitante from '../../img/plane-svgrepo-com.svg';
 import '../../styles/principalPage.css';
 
 const Body = () => {
   const [data, setData] = useState([]);
   const [upcomingMatch, setUpcomingMatch] = useState(null);
   const [recentMatches, setRecentMatches] = useState([]);
+  const [nextRivalInfo, setNextRivalInfo] = useState([]);
+  const [scoutedPlayers, setscoutedPlayers] = useState([]);
+  const [personalPlayers, setpersonalPlayers] = useState([]);
   const currentUser = authService.getCurrentUser();
 
   useEffect(() => {
@@ -16,6 +21,9 @@ const Body = () => {
           setData(response.data);
           const clubId = response.data[0].clubId;
           fetchLastMatches(clubId);
+          fetchScoutedPlayers(clubId);
+          fetchPersonalPlayers(clubId);
+          fetchNextTeamInfo(clubId);
         })
         .catch(error => {
           console.error('Error al obtener datos:', error);
@@ -36,6 +44,36 @@ const Body = () => {
       });
   };
 
+  const fetchScoutedPlayers = (clubId) => {
+    axios.get(`http://localhost:5000/api/players/getScoutedPlayers/${clubId}`)
+      .then(response => {
+        setscoutedPlayers(response.data)
+      })
+      .catch(error => {
+        console.error('Error al obtener los últimos partidos:', error);
+      });
+  };
+
+  const fetchPersonalPlayers = (clubId) => {
+    axios.get(`http://localhost:5000/api/players/getPersonalPlayers/${clubId}`)
+      .then(response => {
+        setpersonalPlayers(response.data)
+      })
+      .catch(error => {
+        console.error('Error al obtener los últimos partidos:', error);
+      });
+  };
+
+  const fetchNextTeamInfo = (clubId) => {
+    axios.get(`http://localhost:5000/api/teams/nextTeamInfo/${clubId}`)
+      .then(response => {
+        setNextRivalInfo(response.data);
+      })
+      .catch(error => {
+        console.error('Error al obtener la informació del siguiente rival:', error);
+      });
+  };
+
   return (
     <main>
       {data.length > 0 && (
@@ -50,33 +88,97 @@ const Body = () => {
 
       <div className="flex-container">
         <div className="flex-items">
-          <h2>Próximo Partido</h2>
+          <h2 className='title'>Próximo Partido</h2>
+          {/* Verificar si hay al menos un partido reciente */}
+          {recentMatches.length > 0 && (
+            <div className='childContentDiv'>
+              <img src={recentMatches[0].rival_image} alt={recentMatches[0].rival_name} className='escudo'/>
+              <p className='onep'>{recentMatches[0].rival_name}</p>
+              <p className='twop'>{recentMatches[0].match_day.slice(0, 5)}</p>
+              <p className='trep'>{recentMatches[0].match_hour}</p>
+              {recentMatches[0].local_or_visitor === 'Local' ? (
+                <img src={logoLocal} alt={'Local'} className='lv'/>
+              ) : (
+                <img src={logoVisitante} alt={'Visitante'} className='lv'/>
+              )}
+              {recentMatches[0].result === '-' ? (
+                <p className='resultN'>-</p>
+              ) : (
+                <p className='resultY'>{recentMatches[0].result}</p>
+              )}
+            </div>
+          )}
+          {/* Verificar si hay al menos dos partidos recientes */}
+          {recentMatches.length > 1 && (
+            <div className='childContentDiv'>
+              <img src={recentMatches[1].rival_image} alt={recentMatches[1].rival_name} className='escudo'/>
+              <p className='onep'>{recentMatches[1].rival_name}</p>
+              <p className='twop'>{recentMatches[1].match_day.slice(0, 5)}</p>
+              <p className='trep'>{recentMatches[1].match_hour}</p>
+              {recentMatches[1].local_or_visitor === 'Local' ? (
+                <img src={logoLocal} alt={'Local'} className='lv'/>
+              ) : (
+                <img src={logoVisitante} alt={'Visitante'} className='lv'/>
+              )}
+              {recentMatches[1].result === '-' ? (
+                <p className='resultN'>-</p>
+              ) : (
+                <p className='resultY'>{recentMatches[1].result}</p>
+              )}
+            </div>
+          )}
           {upcomingMatch ? (
-            <div>
-              <p>Rival: {upcomingMatch.rival_name}</p>
-              <img src={upcomingMatch.rival_image} alt={upcomingMatch.rival_name} />
-              <p>Fecha: {upcomingMatch.match_day} a las {upcomingMatch.match_hour}</p>
-              <p>Localidad: {upcomingMatch.local_or_visitor}</p>
-              <p>Resultado: {upcomingMatch.result}</p>
+            <div className='childContentDiv'>
+              <img src={upcomingMatch.rival_image} alt={upcomingMatch.rival_name} className='escudo'/>
+              <p className='onep'>{upcomingMatch.rival_name}</p>
+              <p className='twop'>{upcomingMatch.match_day.slice(0, 5)}</p>
+              <p className='trep'>{upcomingMatch.match_hour}</p>
+              {upcomingMatch.local_or_visitor === 'Local' ? (
+                <img src={logoLocal} alt={'Local'} className='lv'/>
+              ) : (
+                <img src={logoVisitante} alt={'Visitante'} className='lv'/>
+              )}
+              {upcomingMatch.result === '-' ? (
+                <p className='resultN'>-</p>
+              ) : (
+                <p className='resultY'>{upcomingMatch.result}</p>
+              )}
             </div>
           ) : (
             <p>No hay próximos partidos.</p>
           )}
-
-          <h2>Partidos Recientes</h2>
-          {recentMatches.map((match, index) => (
-            <div key={index}>
-              <p>Rival: {match.rival_name}</p>
-              <img src={match.rival_image} alt={match.rival_name} />
-              <p>Fecha: {match.match_day} a las {match.match_hour}</p>
-              <p>Localidad: {match.local_or_visitor}</p>
-              <p>Resultado: {match.result}</p>
+        </div>
+        <div className="flex-items">
+          <h2 className='title'>Ojeador</h2>
+          {scoutedPlayers.map((player, index) => (
+            <div key={index} className='childContentDiv'>
+              <img src={player.image} alt={player.name} className='fotoPlayer'/>
+              <p className='namePlayer'>{player.name}</p>
+              <p className='position'>{player.position}</p>
+              <img src={player.escudo} alt={player.teamName} className='escudo'/>
             </div>
           ))}
         </div>
-        <div className="flex-items">Este DIV es el de OJEADOR</div>
-        <div className="flex-items">Este DIV es el de MIS JUGADORES</div>
-        <div className="flex-items">Este DIV es el de MIS RIVALES</div>
+        <div className="flex-items">
+          <h2 className='title'>Mis jugadores</h2>
+            {personalPlayers.map((player, index) => (
+              <div key={index} className='childContentDiv'>
+                <img src={player.image} alt={player.name} className='fotoPlayer'/>
+                <p className='namePlayer2'>{player.name}</p>
+                <p className='position2'>{player.position}</p>
+              </div>
+            ))}
+        </div>
+        <div className="flex-items">
+          <h2 className='title'>Próximo Rival</h2>
+          {nextRivalInfo.map((player, index) => (
+            <div key={index} className='childContentDiv'>
+              <img src={player.image} alt={player.name} className='fotoPlayer'/>
+              <p className='namePlayer2'>{player.name}</p>
+              <p className='position2'>{player.position}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </main>
   );
