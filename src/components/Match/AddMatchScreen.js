@@ -1,51 +1,62 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import editarLogo from "../../img/pencil-svgrepo-com.svg";
+import eliminarLogo from "../../img/trash-bin-minimalistic-2-svgrepo-com.svg";
 import { useParams, Link } from 'react-router-dom';
+import { parse, isToday, isAfter } from 'date-fns';
 
 const AddMatchScreen = () => {
   const { teamId } = useParams();
   const [matches, setMatches] = useState([]);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
+    fetchMatches();
+  }, [teamId]);
+
+  const fetchMatches = () => {
     axios.get(`/api/getMatchesOfClub/${teamId}`)
       .then(response => {
         setMatches(response.data);
       })
       .catch(error => {
         console.error('Error fetching matches:', error);
-        setError(error.message);
       });
-  }, [teamId]);
+  };
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
+  const handleDeleteMatch = (matchId) => {
+    axios.delete(`/api/deleteMatch/${matchId}`)
+      .then(response => {
+        console.log('Partido eliminado con éxito');
+        // Actualizar la lista de partidos después de eliminar uno
+        fetchMatches();
+      })
+      .catch(error => {
+        console.error('Error al eliminar el partido:', error);
+      });
+  };
+  
   return (
-
     <>
-    <div className='msgMatchFrame'>
-      <h1>Calendari de partits</h1>
-      <Link to={`/addMatchScreen/AddMatch/${teamId}`}>
-        <button className='buttonAdd'>Afegir partits</button>
-      </Link>
-    </div>
-    <table className='tableMatches'>
-      <thead className='headTableMatches'>
-        <tr>
-          <th>Journey</th>
-          <th colSpan={3}>Local Team</th>
-          <th colSpan={2}>Visitor Team</th>
-          <th>Day</th>
-          <th>Hour</th>
-          <th>League</th>
-          <th>Resultat</th>
-        </tr>
-      </thead>
-      <tbody>
-        {matches.map(match => (
-          <tr key={match.id_match}>
+      <div className='msgMatchFrame'>
+        <h1>Calendario de partidos</h1>
+        <Link to={`/addMatchScreen/AddMatch/${teamId}`}>
+          <button className='buttonAdd'>Agregar partidos</button>
+        </Link>
+      </div>
+      <table className='tableMatches'>
+        <thead className='headTableMatches'>
+          <tr>
+            <th>Jornada</th>
+            <th colSpan={3}>Local</th>
+            <th colSpan={2}>Visitante</th>
+            <th>Día</th>
+            <th>Hora</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+        {matches.map((match, index) => (
+          <tr key={match.id_match} className={index % 2 === 0 ? 'par' : 'impar'}>
             <td>{match.journey}</td>
             <td className='td-with-image'><img src={match.local_team_image} alt="Escudo local" /></td>
             <td>{match.local_team}</td>
@@ -54,12 +65,29 @@ const AddMatchScreen = () => {
             <td>{match.visitor_team}</td>
             <td>{match.day}</td>
             <td>{match.hour}</td>
-            <td>{match.league}</td>
-            <td>{match.result != null ? match.result : '-'}</td>
+            <td>
+              {match.result != null ? (
+                <div>{match.result}</div>
+              ) : (
+                isToday(parse(match.day, 'dd/MM/yyyy', new Date())) ? (
+                  <Link className='applyStats'>Analizar</Link>
+                ) : (
+                  isAfter(parse(match.day, 'dd/MM/yyyy', new Date()), new Date()) ? (
+                    <div className='accionMenu'>
+                      <Link className="modify"><img className="logoEditar" src={editarLogo} alt="Editar partido" /></Link>
+                      <Link to="#" className="delete" onClick={() => handleDeleteMatch(match.id_match)}><img className="logoDelete" src={eliminarLogo} alt="Eliminar partido" /></Link>
+                    </div>
+                  ) : (
+                    <div>NO RESULTADO</div>
+                  )
+                )
+              )}
+            </td>
           </tr>
         ))}
-      </tbody>
-    </table></>
+        </tbody>
+      </table>
+    </>
   );
 };
 

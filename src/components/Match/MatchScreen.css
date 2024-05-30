@@ -22,18 +22,20 @@
 .tableMatches {
     width: 80%;
     margin: 1% auto 2% auto;
+    border-collapse: collapse;
 }
 
 thead th:nth-child(1) {
-    width: 2%;
+    width: 1%;
+    border-top-left-radius: 5px;
 }
 
 thead th:nth-child(2) {
-    width: 19%;
+    width: 27.5%;
 }
 
 thead th:nth-child(3) {
-    width: 19%;
+    width: 27.5%;
 }
 
 thead th:nth-child(4) {
@@ -41,20 +43,19 @@ thead th:nth-child(4) {
 }
 
 thead th:nth-child(5) {
-    width: 5%;
+    width: 1%;
 }
 
 thead th:nth-child(6) {
-    width: 20%;
-}
-
-thead th:nth-child(7) {
-    width: 5%;
+    width: 15%;
+    border-top-right-radius: 5px;
 }
 
 th {
+    font-size: 20px;
     padding: 10px;
     text-align: center;
+    background-color: #EEEEEE;
 }
 
 td {
@@ -65,4 +66,42 @@ td {
 td.td-with-image img {
     width: 60px;
     height: 50px;
+}
+
+.impar {
+    background-color: #EEEEEE;
+}
+
+.applyStats {
+    background-color: rgb(24, 117, 0);
+    padding: 9%;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+}
+
+.accionMenu {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.modify {
+    justify-content: center;
+    margin-left: 10%;
+}
+
+.delete {
+    margin-right: 10%;
+}
+
+.logoEditar {
+    width: 90%;
+}
+
+.logoDelete {
+    width: 90%;
 }

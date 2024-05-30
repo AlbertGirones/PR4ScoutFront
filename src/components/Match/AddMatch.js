@@ -64,19 +64,29 @@ const AddMatch = () => {
   };
 
   const handleLocalTeamChange = (event) => {
+    console.log("Local team selected:", event.target.value);
     setSelectedLocalTeam(event.target.value);
   };
 
   const handleVisitorTeamChange = (event) => {
+    console.log("Visitor team selected:", event.target.value);
     setSelectedVisitorTeam(event.target.value);
   };
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log("Selected local team:", selectedLocalTeam);
+    console.log("Selected visitor team:", selectedVisitorTeam);
     try {
       let localTeamToSend = null;
       let visitorTeamToSend = null;
   
+
+      console.log('Selected option:', selectedOption);
+      console.log('Selected visitor team:', selectedVisitorTeam);
+      console.log('Selected local team:', selectedLocalTeam);
+
       // Determinar qué equipo se jugará como local y cuál como visitante
       if (selectedOption === 'local') {
         localTeamToSend = teamId;
@@ -136,6 +146,7 @@ const AddMatch = () => {
         <div>
           <label htmlFor="localTeams">Seleccione el equipo rival:</label>
           <select id="localTeams" value={selectedLocalTeam} onChange={handleLocalTeamChange}>
+            <option>Selecciona un equipo</option>
             {localTeams.map(team => (
               <option key={team.id} value={team.id}>{team.equipo_local}</option>
             ))}
@@ -147,14 +158,22 @@ const AddMatch = () => {
         <div>
           <label htmlFor="visitorTeams">Seleccione el equipo local:</label>
           <select id="visitorTeams" value={selectedVisitorTeam} onChange={handleVisitorTeamChange}>
+            <option>Selecciona un equipo</option>
             {visitorTeams.map(team => (
               <option key={team.id} value={team.id}>{team.equipo_visitante}</option>
             ))}
           </select>
         </div>
+
       )}
 
-      <button type="submit">Guardar</button>
+      {selectedOption === 'visitante' && (
+        <button type="submit" disabled={!selectedLocalTeam}>Guardar</button>
+      )}
+
+      {selectedOption === 'local' && (
+        <button type="submit" disabled={!selectedVisitorTeam}>Guardar</button>
+      )}
     </form>
   );
 };

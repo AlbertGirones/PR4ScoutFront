@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import authService from '../../services/authService';
 import logoLocal from '../../img/house-svgrepo-com.svg';
@@ -6,6 +7,7 @@ import logoVisitante from '../../img/plane-svgrepo-com.svg';
 import '../../styles/principalPage.css';
 
 const Body = () => {
+  const [clubId, setClubId] = useState(null);
   const [data, setData] = useState([]);
   const [upcomingMatch, setUpcomingMatch] = useState(null);
   const [recentMatches, setRecentMatches] = useState([]);
@@ -19,11 +21,13 @@ const Body = () => {
       axios.get(`http://localhost:5000/api/userDataRoutes/${currentUser.idUser}`)
         .then(response => {
           setData(response.data);
-          const clubId = response.data[0].clubId;
-          fetchLastMatches(clubId);
-          fetchScoutedPlayers(clubId);
-          fetchPersonalPlayers(clubId);
-          fetchNextTeamInfo(clubId);
+          setClubId(response.data[0].clubId);
+          if (clubId) {
+            fetchLastMatches(clubId);
+            fetchScoutedPlayers(clubId);
+            fetchPersonalPlayers(clubId);
+            fetchNextTeamInfo(clubId);
+          }
         })
         .catch(error => {
           console.error('Error al obtener datos:', error);
@@ -31,7 +35,7 @@ const Body = () => {
     } else {
       console.error('No se pudo obtener el ID del usuario');
     }
-  }, [currentUser]);
+  }, [clubId, currentUser]);
 
   const fetchLastMatches = (clubId) => {
     axios.get(`http://localhost:5000/api/matches/upcomingAndRecent/${clubId}`)
@@ -87,7 +91,7 @@ const Body = () => {
       )}
 
       <div className="flex-container">
-        <div className="flex-items">
+        <Link to={`/addMatchScreen/${clubId}`} className="flex-items">
           <h2 className='title'>Próximo Partido</h2>
           {/* Verificar si hay al menos un partido reciente */}
           {recentMatches.length > 0 && (
@@ -147,7 +151,7 @@ const Body = () => {
           ) : (
             <p>No hay próximos partidos.</p>
           )}
-        </div>
+        </Link>
         <div className="flex-items">
           <h2 className='title'>Ojeador</h2>
           {scoutedPlayers.map((player, index) => (
