@@ -110,28 +110,28 @@ const InfoInMatchPlayer = () => {
                 <div className={`${getPositionClass(playerPosition)}`}>{playerPosition}</div>
             </div>
             )}
-            <div className='essentialStats'>
+            <div className='essentialStatsInInfoMatch'>
                 {playerStats.length > 0 && (
                     <>
                         {playerStats[0].goals !== 0 && (
-                            <div className='childEssentialStats'>
+                            <div className='childEssentialStatsInInfoMatch'>
                                 <p>X</p>
                                 <p className='statEssentials'>{playerStats[0].goals}</p>
-                                <img src={imgGoles} alt="Goles" className='football'></img>
+                                <img src={imgGoles} alt="Goles" className='footballInMatchOL'></img>
                             </div>
                         )}
                         {playerStats[0].assist !== 0 && (
-                            <div className='childEssentialStats'>
+                            <div className='childEssentialStatsInInfoMatch'>
                                 <p>X</p>
                                 <p className='statEssentials'>{playerStats[0].assist}</p>
-                                <img src={imgAssists} alt="Assists" className='football'></img>
+                                <img src={imgAssists} alt="Assists" className='footballInMatchOL'></img>
                             </div>
                         )}
                         {playerStats[0].yellow_cards !== 0 && (
-                            <div className='childEssentialStats'>
+                            <div className='childEssentialStatsInInfoMatch'>
                                 <p>X</p>
                                 <p className='statEssentials'>{playerStats[0].yellow_cards}</p>
-                                <img src={imgYellowCard} alt="Assists" className='yellowCard'></img>
+                                <img src={imgYellowCard} alt="Assists" className='yellowCardInMatchOL'></img>
                             </div>
                         )}
                     </>

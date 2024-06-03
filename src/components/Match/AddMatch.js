@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AddMatch = () => {
   const { teamId } = useParams();
@@ -14,6 +17,7 @@ const AddMatch = () => {
   const [selectedJourney, setSelectedJourney] = useState('');
   const [selectedLocalTeam, setSelectedLocalTeam] = useState('');
   const [selectedVisitorTeam, setSelectedVisitorTeam] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`/api/getLeagueOfClub/${teamId}`)
@@ -64,28 +68,19 @@ const AddMatch = () => {
   };
 
   const handleLocalTeamChange = (event) => {
-    console.log("Local team selected:", event.target.value);
     setSelectedLocalTeam(event.target.value);
   };
 
   const handleVisitorTeamChange = (event) => {
-    console.log("Visitor team selected:", event.target.value);
     setSelectedVisitorTeam(event.target.value);
   };
   
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Selected local team:", selectedLocalTeam);
-    console.log("Selected visitor team:", selectedVisitorTeam);
     try {
       let localTeamToSend = null;
       let visitorTeamToSend = null;
-  
-
-      console.log('Selected option:', selectedOption);
-      console.log('Selected visitor team:', selectedVisitorTeam);
-      console.log('Selected local team:', selectedLocalTeam);
 
       // Determinar qué equipo se jugará como local y cuál como visitante
       if (selectedOption === 'local') {
@@ -106,75 +101,103 @@ const AddMatch = () => {
       formData.append('journey', selectedJourney);
       // Enviar la solicitud POST al servidor
       const response = await axios.post('http://localhost:5000/api/addMatch', formData);
-      console.log('Datos del partido guardados correctamente.', response.data);
+      if (response.status === 200) {
+        toast.success('Partido creado correctamente', {
+          autoClose: 1500,
+          onClose: () => navigate(`/MatchScreen/${teamId}`)
+        });
+        console.log('Partido creado correctamente:', response.data);
+      }
     } catch (error) {
-      console.error('Error al guardar los datos del partido:', error);
+      if (error.response && error.response.data && error.response.data.error) {
+        toast.error(error.response.data.error, {
+          autoClose: 3000
+        });
+      } else {
+        toast.error('Error al crear el partido', {
+          autoClose: 3000
+        });
+      }
+      console.error('Error al crear el partido:', error);
     }
   };
   
 
   if (error) {
-    return <div>Error: {error}</div>;
-  }   
+    if (error.response && error.response.status === 404) {
+      toast.error('Ya tienes todos los partidos programados', {
+        autoClose: 3000
+      });
+    } else {
+      toast.error('Error: ' + error.message, {
+        autoClose: 3000
+      });
+    }
+    return <h1 className='msgErrorAddMatch'>Tu equipo tiene todos los partidos programados</h1>;
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="matchJourney">Seleccione la jornada del partido:</label>
-        <input type="number" id="matchJourney" value={selectedJourney} onChange={handleJourneyChange} min="1" max="50" />
-      </div>
-      <div>
-        <label htmlFor="matchDate">Seleccione la fecha del partido:</label>
-        <input type="date" id="matchDate" value={selectedDate} onChange={handleDateChange} />
-      </div>
-
-      <div>
-        <label htmlFor="matchTime">Seleccione la hora del partido:</label>
-        <input type="time" id="matchTime" value={selectedTime} onChange={handleTimeChange} />
-      </div>
-
-      <div>
-        <label htmlFor="matchType">Seleccione si jugará de local o visitante:</label>
-        <select id="matchType" value={selectedOption} onChange={handleOptionChange}>
-          <option value="">Seleccione una opción</option>
-          <option value="local">Local</option>
-          <option value="visitante">Visitante</option>
-        </select>
-      </div>
-
-      {selectedOption === 'visitante' && (
+    <div className="flex-containerAddPLayer">
+      <h1>Insertar partido</h1>
+      <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="localTeams">Seleccione el equipo rival:</label>
-          <select id="localTeams" value={selectedLocalTeam} onChange={handleLocalTeamChange}>
-            <option>Selecciona un equipo</option>
-            {localTeams.map(team => (
-              <option key={team.id} value={team.id}>{team.equipo_local}</option>
-            ))}
-          </select>
+          <label htmlFor="matchJourney">Seleccione la jornada del partido:</label>
+          <input type="number" id="matchJourney" value={selectedJourney} onChange={handleJourneyChange} min="1" max="50" />
         </div>
-      )}
-
-      {selectedOption === 'local' && (
         <div>
-          <label htmlFor="visitorTeams">Seleccione el equipo local:</label>
-          <select id="visitorTeams" value={selectedVisitorTeam} onChange={handleVisitorTeamChange}>
-            <option>Selecciona un equipo</option>
-            {visitorTeams.map(team => (
-              <option key={team.id} value={team.id}>{team.equipo_visitante}</option>
-            ))}
+          <label htmlFor="matchDate">Seleccione la fecha del partido:</label>
+          <input type="date" id="matchDate" value={selectedDate} onChange={handleDateChange} />
+        </div>
+
+        <div>
+          <label htmlFor="matchTime">Seleccione la hora del partido:</label>
+          <input type="time" id="matchTime" value={selectedTime} onChange={handleTimeChange} />
+        </div>
+
+        <div>
+          <label htmlFor="matchType">Seleccione si jugará de local o visitante:</label>
+          <select id="matchType" value={selectedOption} onChange={handleOptionChange}>
+            <option value="">Seleccione una opción</option>
+            <option value="local">Local</option>
+            <option value="visitante">Visitante</option>
           </select>
         </div>
 
-      )}
+        {selectedOption === 'visitante' && (
+          <div>
+            <label htmlFor="localTeams">Seleccione el equipo rival:</label>
+            <select id="localTeams" value={selectedLocalTeam} onChange={handleLocalTeamChange}>
+              <option>Selecciona un equipo</option>
+              {localTeams.map(team => (
+                <option key={team.id} value={team.id}>{team.equipo_local}</option>
+              ))}
+            </select>
+          </div>
+        )}
 
-      {selectedOption === 'visitante' && (
-        <button type="submit" disabled={!selectedLocalTeam}>Guardar</button>
-      )}
+        {selectedOption === 'local' && (
+          <div>
+            <label htmlFor="visitorTeams">Seleccione el equipo local:</label>
+            <select id="visitorTeams" value={selectedVisitorTeam} onChange={handleVisitorTeamChange}>
+              <option>Selecciona un equipo</option>
+              {visitorTeams.map(team => (
+                <option key={team.id} value={team.id}>{team.equipo_visitante}</option>
+              ))}
+            </select>
+          </div>
 
-      {selectedOption === 'local' && (
-        <button type="submit" disabled={!selectedVisitorTeam}>Guardar</button>
-      )}
-    </form>
+        )}
+
+        {selectedOption === 'visitante' && (
+          <button type="submit" disabled={!selectedLocalTeam}>Guardar</button>
+        )}
+
+        {selectedOption === 'local' && (
+          <button type="submit" disabled={!selectedVisitorTeam}>Guardar</button>
+        )}
+      </form>
+      <ToastContainer />
+    </div>
   );
 };
 

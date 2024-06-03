@@ -85,12 +85,18 @@ const Body = () => {
 
   return (
     <main>
-      {data.length > 0 && (
+      {data && data.length > 0 && (
         <div className="flex-message">
           <p>Hola, {data[0].userName} {data[0].userSurname}!</p>
           <div className="flex-mssgItem">
-            <img src={data[0].image} alt="Avatar del usuario" />
-            <p>{data[0].teamName}</p>
+            {data[0].image && data[0].teamName ? (
+              <>
+                <img src={data[0].image} alt="Avatar del usuario" />
+                <p>{data[0].teamName}</p>
+              </>
+            ) : (
+              <div>No tienes ninguna licencia, contacta con tu coordinador</div>
+            )}
           </div>
         </div>
       )}
@@ -152,7 +158,7 @@ const Body = () => {
               )}
             </div>
           ) : (
-            <p>No hay próximos partidos.</p>
+            <p className='msgError'>No hay próximos partidos.</p>
           )}
         </Link>
         <div className="flex-items">

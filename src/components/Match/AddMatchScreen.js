@@ -74,7 +74,7 @@ const AddMatchScreen = () => {
                 ) : (
                   isAfter(parse(match.day, 'dd/MM/yyyy', new Date()), new Date()) ? (
                     <div className='accionMenu'>
-                      <Link to={`/MatchScreen/ModifyMatch/${teamId}`} className="modify"><img className="logoEditar" src={editarLogo} alt="Editar partido" /></Link>
+                      <Link to={`/MatchScreen/ModifyMatch/${teamId}/${match.id_match}`} className="modify"><img className="logoEditar" src={editarLogo} alt="Editar partido" /></Link>
                       <Link to="#" className="delete" onClick={() => handleDeleteMatch(match.id_match)}><img className="logoDelete" src={eliminarLogo} alt="Eliminar partido" /></Link>
                     </div>
                   ) : (

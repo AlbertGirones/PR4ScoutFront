@@ -93,3 +93,7 @@
 .flex-mssgItem > p {
     font-size: 20px;
 }
+
+.msgError {
+    padding-left: 5%;
+}

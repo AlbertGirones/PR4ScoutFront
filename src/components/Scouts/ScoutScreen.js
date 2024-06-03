@@ -3,7 +3,7 @@ import axios from 'axios';
 import editarLogo from "../../img/pencil-svgrepo-com.svg";
 import eliminarLogo from "../../img/trash-bin-minimalistic-2-svgrepo-com.svg";
 import { useParams, Link } from 'react-router-dom';
-
+import './ScoutScreen.css';
 // Define la URL base de tu servidor
 const BASE_URL = 'http://localhost:5000';
 
@@ -83,7 +83,7 @@ const ScoutScreen = () => {
                 <td className={`${getPositionClass(player.position)}`}>{player.position}</td>
                 {/* Concatena la URL base con la ruta de la imagen */}
                 <td className='td-with-image-Player'><img src={`${BASE_URL}/${player.image}`} alt="" /></td>
-                <td><Link to={`/viewGeneralPlayer/${teamId}/${player.id_player}`}>{player.name}</Link></td>
+                <td><Link className="LinkscoutsNOMBRE" to={`/viewGeneralPlayer/${teamId}/${player.id_player}`}>{player.name}</Link></td>
                 <td>{player.description}</td>
                 <td><Link to={`/ScoutScreen/ModifyScout/${player.id_scout}/${player.id_player}`} className="modify"><img className="logoEditar" src={editarLogo} alt="Editar partido" /></Link></td>
                 <td><Link to="#" className="delete" onClick={() => handleDeletePlayer(player.id_player)}><img className="logoEditar" src={eliminarLogo} alt="Eliminar jugador" /></Link></td>

@@ -56,7 +56,7 @@ function App() {
 
               <Route path="/MatchScreen/:teamId" element={<AddMatchScreen />} />
               <Route path="/MatchScreen/AddMatch/:teamId" element={<AddMatch />} />
-              <Route path="/MatchScreen/ModifyMatch/:teamId" element={<ModifyMatch />} />
+              <Route path="/MatchScreen/ModifyMatch/:teamId/:matchId" element={<ModifyMatch />} />
 
               {/* TEAM SCREEN */}
 

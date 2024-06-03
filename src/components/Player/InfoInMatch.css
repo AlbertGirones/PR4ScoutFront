@@ -12,3 +12,32 @@
 .infoPlayerInfoInMatch > h1 {
     margin: auto 0 auto 4%;
 }
+
+.essentialStatsInInfoMatch {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 70px;
+    margin: 2% auto 2% 0%;
+}
+
+.childEssentialStatsInInfoMatch {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    align-content: flex-start;
+}
+
+.footballInMatchOL{
+    width: 40%;
+}
+
+.yellowCardInMatchOL {
+    width: 8%;
+}
+
+.statEssentials {
+    font-size: 50px;
+    margin-bottom: 0px;
+}

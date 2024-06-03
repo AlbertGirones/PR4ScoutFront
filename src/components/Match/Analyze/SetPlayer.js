@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
+import './CSS/SetPlayer.css';
 
 const SetPlayer = () => {
   const { matchId } = useParams();
@@ -85,7 +86,7 @@ const SetPlayer = () => {
                 <li>No quedan jugadores por analizar</li>
               ) : (
                 localPlayers.map((player, index) => (
-                  <li className={index % 2 === 0 ? 'par' : 'impars'}>
+                  <li className={index % 2 === 0 ? 'ParsInSetPlayers' : 'imparsInSetPlayers'}>
                     <Link to={`/AnalyzePlayer/SetStats/${matchId}/${player.id_player}`}>
                       <img src={player.image ? `/${player.image}` : 'imagen_por_defecto.jpg'} alt={player.name} className='fotoPlayerSetPlayer' />
                       <p className='NamePlayer'>{player.name}</p>
@@ -103,7 +104,7 @@ const SetPlayer = () => {
               <li>No quedan jugadores por analizar</li>
             ) : (
               visitantPlayers.map((player, index) => (
-                <li key={index} className={index % 2 === 0 ? 'par' : 'impar'}>
+                <li key={index} className={index % 2 === 0 ? 'ParsInSetPlayers' : 'imparsInSetPlayers'}>
                   <Link to={`/AnalyzePlayer/SetStats/${matchId}/${player.id_player}`}>
                     <img src={player.image ? `/${player.image}` : 'imagen_por_defecto.jpg'} alt={player.name} className='fotoPlayerSetPlayer' />
                     <p className='NamePlayer'>{player.name}</p>

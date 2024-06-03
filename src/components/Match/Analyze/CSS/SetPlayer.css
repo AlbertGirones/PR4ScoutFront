@@ -53,7 +53,7 @@
     text-align: center;
 }
 
-.par > a{
+.ParsInSetPlayers > a{
     display: flex;
     flex-direction: row;
     text-decoration: none;
@@ -61,7 +61,7 @@
     background-color: #EEEEEE;
 }
 
-.impars > a{
+.imparsInSetPlayers > a{
     display: flex;
     flex-direction: row;
     text-decoration: none;
