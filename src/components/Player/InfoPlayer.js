@@ -143,7 +143,7 @@ const InfoPlayer = () => {
                             )}
                             <div>
                                 {/* Enlace para ver las estadísticas del jugador en el partido específico */}
-                                <Link to={`/MyTeamScreen/viewMatchOfPlayer/${player.player}/${player.id_match}`} className='nimutesOfInfoPlayerPageLINK'>
+                                <Link to={`/viewMatchOfPlayer/${player.player}/${player.id_match}`} className='nimutesOfInfoPlayerPageLINK'>
                                     Ver estadísticas
                                 </Link>
                             </div>

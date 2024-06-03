@@ -156,15 +156,17 @@ const Body = () => {
           )}
         </Link>
         <div className="flex-items">
-          <h2 className='title'>Ojeador</h2>
-          {scoutedPlayers.map((player, index) => (
-            <div key={index} className='childContentDiv'>
-              <img src={player.image} alt={player.name} className='fotoPlayerPrincipall' />
-              <p className='namePlayer'>{player.name}</p>
-              <p className='position'>{player.position}</p>
-              <img src={player.escudo} alt={player.teamName} className='escudoPP' />
-            </div>
-          ))}
+          <Link to={`/ScoutScreen/${clubId}`} className="Link-flex-items">
+            <h2 className='title'>Ojeador</h2>
+            {scoutedPlayers.map((player, index) => (
+              <div key={index} className='childContentDiv'>
+                <img src={player.image} alt={player.name} className='fotoPlayerPrincipall' />
+                <p className='namePlayer'>{player.name}</p>
+                <p className='position'>{player.position}</p>
+                <img src={player.escudo} alt={player.teamName} className='escudoPP' />
+              </div>
+            ))}
+          </Link>
         </div>
         <div className="flex-items">
           <Link to={`/MyTeamScreen/${clubId}`} className="Link-flex-items">

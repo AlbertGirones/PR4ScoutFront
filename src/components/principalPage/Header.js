@@ -19,7 +19,7 @@ const Header = () => {
         <img className="logoPrincipal" src={logo} alt="Logo principal" />
         {currentUser ? (
           <div className="navLinks">
-            <><Link to="/add-team" className="Link">Crear equipo</Link><Link to="/add-player" className="Link">Crear jugador</Link><Link to="/add-league" className="Link">Añadir liga</Link><Link to="/logout" className="LinkLogoLogout"><img className="logoLogout" src={logoutLogo} alt="Logout" /></Link></>
+            <><Link to="/add-team" className="Link">Crear equipo</Link><Link to="/add-league" className="Link">Añadir liga</Link><Link to="/logout" className="LinkLogoLogout"><img className="logoLogout" src={logoutLogo} alt="Logout" /></Link></>
           </div>
         ) : (
           <img className="logoLogin" src={loginLogo} alt="Login" />

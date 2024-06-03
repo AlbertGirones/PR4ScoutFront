@@ -3,12 +3,11 @@ import axios from 'axios';
 import editarLogo from "../../img/pencil-svgrepo-com.svg";
 import eliminarLogo from "../../img/trash-bin-minimalistic-2-svgrepo-com.svg";
 import { useParams, Link } from 'react-router-dom';
-import './MyTeamScreen.css';
 
 // Define la URL base de tu servidor
 const BASE_URL = 'http://localhost:5000';
 
-const MyTeamScreen = () => {
+const ScoutScreen = () => {
   const { teamId } = useParams();
   const [players, setPlayers] = useState([]);
 
@@ -18,7 +17,7 @@ const MyTeamScreen = () => {
   }, [teamId]);
 
   const fetchPlayers = () => {
-    axios.get(`/api/getSquadTeam/${teamId}`)
+    axios.get(`/api/getScouts/${teamId}`)
       .then(response => {
         setPlayers(response.data);
       })
@@ -28,7 +27,7 @@ const MyTeamScreen = () => {
   };
 
   const handleDeletePlayer = (playerId) => {
-    axios.delete(`/api/deletePlayer/${playerId}`)
+    axios.delete(`/api/deleteScout/${playerId}`)
       .then(response => {
         console.log('Jugador eliminado con éxito');
         fetchPlayers();
@@ -63,8 +62,8 @@ const MyTeamScreen = () => {
   return (
     <>
       <div className='msgMatchFrame'>
-        <h1>Mi plantilla</h1>
-        <Link to={`/MyTeamScreen/AddPlayer/${teamId}`}>
+        <h1>Jugadores ojeados</h1>
+        <Link to={`/ScoutScreen/AddScout/${teamId}`}>
           <button className='buttonAdd'>Agregar jugador</button>
         </Link>
       </div>
@@ -96,4 +95,4 @@ const MyTeamScreen = () => {
   );
 };
 
-export default MyTeamScreen;
+export default ScoutScreen;
