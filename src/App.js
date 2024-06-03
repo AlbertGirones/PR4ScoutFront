@@ -18,6 +18,8 @@ import InfoInMatchPlayer from './components/Player/InfoInMatchPlayerPage';
 
 import ScoutScreen from './components/Scouts/ScoutScreenPage';
 import AddScout from './components/Scouts/AddScoutPage';
+import ModifyScout from './components/Scouts/ModifyScoutPage';
+
 
 import SetPlayerOfAnalyze from './components/Match/Analyze/SetPlayerPage';
 import SetStatsOfAnalyze from './components/Match/Analyze/SetStatsPage';
@@ -60,7 +62,7 @@ function App() {
 
               <Route path="/MyTeamScreen/:teamId" element={<MyTeamScreen />} />
               <Route path="/MyTeamScreen/AddPlayer/:teamId" element={<AddPlayer />} />
-              <Route path="/MyTeamScreen/ModifyPlayer/:teamId" element={<ModifyPlayer />} />
+              <Route path="/MyTeamScreen/ModifyPlayer/:playerId" element={<ModifyPlayer />} />
               <Route path="/viewGeneralPlayer/:teamId/:playerId" element={<InfoPlayer />} />
               <Route path="/viewMatchOfPlayer/:playerId/:matchId" element={<InfoInMatchPlayer />} />
 
@@ -68,9 +70,9 @@ function App() {
 
               <Route path="/ScoutScreen/:teamId" element={<ScoutScreen />} />
               <Route path="/ScoutScreen/AddScout/:teamId" element={<AddScout />} />
-              {/* <Route path="/ScoutScreen/ModifyScout/:teamId" element={<ModifyPlayer />} />
+              <Route path="/ScoutScreen/ModifyScout/:scoutId/:playerId" element={<ModifyScout />} />
               <Route path="/ScoutScreen/viewGeneralPlayer/:teamId/:playerId" element={<InfoPlayer />} />
-              <Route path="/ScoutScreen/viewMatchOfPlayer/:playerId/:matchId" element={<InfoInMatchPlayer />} /> */}
+              <Route path="/ScoutScreen/viewMatchOfPlayer/:playerId/:matchId" element={<InfoInMatchPlayer />} />
 
               {/* ANALYZE PLAYER */}
               

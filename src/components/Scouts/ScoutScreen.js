@@ -85,7 +85,7 @@ const ScoutScreen = () => {
                 <td className='td-with-image-Player'><img src={`${BASE_URL}/${player.image}`} alt="" /></td>
                 <td><Link to={`/viewGeneralPlayer/${teamId}/${player.id_player}`}>{player.name}</Link></td>
                 <td>{player.description}</td>
-                <td><Link to={`/MatchScreen/ModifyPlayer/${teamId}`} className="modify"><img className="logoEditar" src={editarLogo} alt="Editar partido" /></Link></td>
+                <td><Link to={`/ScoutScreen/ModifyScout/${player.id_scout}/${player.id_player}`} className="modify"><img className="logoEditar" src={editarLogo} alt="Editar partido" /></Link></td>
                 <td><Link to="#" className="delete" onClick={() => handleDeletePlayer(player.id_player)}><img className="logoEditar" src={eliminarLogo} alt="Eliminar jugador" /></Link></td>
               </tr>
             ))}

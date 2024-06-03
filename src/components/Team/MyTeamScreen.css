@@ -13,3 +13,10 @@
 .td-with-image-Player > img {
     width: 25%;
 }
+
+.modify {
+    justify-content: center;
+    margin-left: 10%;
+    background-color: transparent;
+    border: white;
+}
