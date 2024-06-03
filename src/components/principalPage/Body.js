@@ -11,6 +11,7 @@ const Body = () => {
   const [data, setData] = useState([]);
   const [upcomingMatch, setUpcomingMatch] = useState(null);
   const [recentMatches, setRecentMatches] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [nextRivalInfo, setNextRivalInfo] = useState([]);
   const [scoutedPlayers, setScoutedPlayers] = useState([]);
   const [personalPlayers, setPersonalPlayers] = useState([]);

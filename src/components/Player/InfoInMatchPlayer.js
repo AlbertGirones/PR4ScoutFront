@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
@@ -8,15 +9,12 @@ import imgYellowCard from '../../img/zzzzz.svg';
 import './InfoInMatch.css';
 
 const InfoInMatchPlayer = () => {
-    // eslint-disable-next-line no-unused-vars
     const [data, setData] = useState([]);
-    const { playerId, matchId, minPlayed } = useParams();
+    const { playerId, matchId } = useParams();
     const { state } = useLocation();
     const [playerPosition, setPlayerPosition] = useState(null);
     const [idTeam, setPlayerTeam] = useState(null);
     const [playerInfo, setPlayerInfo] = useState([]);
-    const [playerRating, setPlayerRating] = useState(null);
-    const [inserted, setInserted] = useState(false);
     const [clubIdCurrentUser, setClubId] = useState(null);
     const [playerStats, setPlayerStats] = useState([]);
     const navigate = useNavigate();
