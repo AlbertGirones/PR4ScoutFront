@@ -1,18 +1,37 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Modal from 'react-modal';
 import HomePage from './components/HomePage';
-import AddPlayer from './components/Player/AddPlayerPage';
+
+
 import AddTeam from './components/Team/AddTeamPage';
 import AddLeague from './components/League/AddLeaguePage';
+
 import AddMatchScreen from './components/Match/AddMatchScreenPage';
 import AddMatch from './components/Match/AddMatchPage';
+import ModifyMatch from './components/Match/ModifyMatchPage';
+
+import MyTeamScreen from './components/Team/MyTeamScreenPage';
+import AddPlayer from './components/Player/AddPlayerPage';
+import ModifyPlayer from './components/Team/ModifyPlayerPage';
+import InfoPlayer from './components/Player/InfoPlayerPage';
+import InfoInMatchPlayer from './components/Player/InfoInMatchPlayerPage';
+
+import SetPlayerOfAnalyze from './components/Match/Analyze/SetPlayerPage';
+import SetStatsOfAnalyze from './components/Match/Analyze/SetStatsPage';
+import SummaryOfAnalyze from './components/Match/Analyze/SummaryPage';
+
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import Logout from './components/Auth/Logout';
+
 import ProtectedRoute from './components/ProtectedRoute';
 // import Matches from './components/Matches/MatchesPage';
 
 
 function App() {
+
+  Modal.setAppElement('#root');
+
   return (
 
     <Router>
@@ -27,8 +46,27 @@ function App() {
               <Route path="/add-team" element={<AddTeam />} />
               <Route path="/add-player" element={<AddPlayer />} />
               <Route path="/add-league" element={<AddLeague />} />
-              <Route path="/addMatchScreen/:teamId" element={<AddMatchScreen />} />
-              <Route path="/addMatchScreen/AddMatch/:teamId" element={<AddMatch />} />
+
+              {/* MATCH SCREEN */}
+
+              <Route path="/MatchScreen/:teamId" element={<AddMatchScreen />} />
+              <Route path="/MatchScreen/AddMatch/:teamId" element={<AddMatch />} />
+              <Route path="/MatchScreen/ModifyMatch/:teamId" element={<ModifyMatch />} />
+
+              {/* TEAM SCREEN */}
+
+              <Route path="/MyTeamScreen/:teamId" element={<MyTeamScreen />} />
+              <Route path="/MyTeamScreen/AddPlayer/:teamId" element={<AddPlayer />} />
+              <Route path="/MyTeamScreen/ModifyPlayer/:teamId" element={<ModifyPlayer />} />
+              <Route path="/MyTeamScreen/viewGeneralPlayer/:teamId/:playerId" element={<InfoPlayer />} />
+              <Route path="/MyTeamScreen/viewMatchOfPlayer/:playerId/:matchId" element={<InfoInMatchPlayer />} />
+
+              {/* ANALYZE PLAYER */}
+              
+              <Route path="/AnalyzePlayer/SetPlayer/:matchId" element={<SetPlayerOfAnalyze />} />
+              <Route path="/AnalyzePlayer/SetStats/:matchId/:playerId" element={<SetStatsOfAnalyze />} />
+              <Route path="/AnalyzePlayer/Summary/:matchId/:playerId/:minPlayed" element={<SummaryOfAnalyze />} />
+
           </Route>
       </Routes>
     </Router>

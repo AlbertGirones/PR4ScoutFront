@@ -1,0 +1,93 @@
+.summary {
+    width: 90%;
+    margin: 1% auto 4% auto;
+}
+
+.infoPlayerSummary {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.infoPlayerSummary > h1 {
+    margin: auto 0 auto 0%;
+}
+
+.Rating {
+    margin: auto auto auto auto;
+}
+
+.defender {
+    float: right;
+    margin: auto 10% auto auto;
+    padding: 2%;
+    font-size: 30px;
+    border-radius: 10px;
+    background-color: rgb(57, 165, 254);
+}
+
+.midfielder{
+    float: right;
+    margin: auto 10% auto 5%;
+    padding: 2%;
+    font-size: 30px;
+    border-radius: 10px;
+    background-color: rgb(90, 254, 57);
+}
+
+.forward{
+    float: right;
+    margin: auto 10% auto 5%;
+    padding: 2%;
+    font-size: 30px;
+    border-radius: 10px;
+    background-color: rgb(254, 83, 57);
+}
+
+.fotoPlayerSummary {
+    width: 15%;
+}
+
+.essentialStats {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 70px;
+    justify-content: space-between;
+    margin: 2% auto 2% 0%;
+}
+
+.childEssentialStats {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    align-content: flex-start;
+}
+
+.football{
+    width: 50%;
+}
+
+.yellowCard {
+    width: 8%;
+}
+
+.statEssentials {
+    font-size: 50px;
+    margin-bottom: 0px;
+}
+
+.SUBTITULO {
+    text-align: left;
+}
+
+.buttonAddStatsResume {
+    margin: 2% 5% 4% auto;
+    padding: 2%;
+    border: none;
+    border-radius: 20px;
+    background-color: rgb(24, 117, 0);
+    color: white;
+    font-weight: bold;
+}

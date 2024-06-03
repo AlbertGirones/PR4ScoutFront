@@ -1,0 +1,106 @@
+.playerInfo {
+    width: 90%;
+    margin: 1% auto 4% auto;
+}
+
+.infoPlayerfirstContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.fotoPlayerInfoPlayer {
+    width: 15%;
+}
+
+.infoPlayerfirstContainer > h1 {
+    margin: auto 0 auto 5%;
+}
+
+.defender {
+    float: right;
+    margin: auto 10% auto auto;
+    padding: 2%;
+    font-size: 30px;
+    border-radius: 10px;
+    background-color: rgb(57, 165, 254);
+}
+
+.midfielder{
+    float: right;
+    margin: auto 10% auto 5%;
+    padding: 2%;
+    font-size: 30px;
+    border-radius: 10px;
+    background-color: rgb(90, 254, 57);
+}
+
+.forward{
+    float: right;
+    margin: auto 10% auto 5%;
+    padding: 2%;
+    font-size: 30px;
+    border-radius: 10px;
+    background-color: rgb(254, 83, 57);
+}
+
+/* BOX DE PARTIDOS */
+
+.iconMatchResumeLastFiveContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.iconMatchResumeLastFive {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 8%;
+    height: 5%;
+    margin-right: 4%;
+}
+
+.nimutesOfInfoPlayerPage {
+    width: 100%;
+    height: 60%;
+    font-size: 50px;
+}
+
+.nimutesOfInfoPlayerPageGOALS {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.nimutesOfInfoPlayerPageGOALS > img {
+    width: 25%;
+}
+
+.nimutesOfInfoPlayerPageASSIST {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.nimutesOfInfoPlayerPageASSIST > img {
+    width: 25%;
+}
+
+.nimutesOfInfoPlayerPageYELLOWCARDS {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.nimutesOfInfoPlayerPageYELLOWCARDS > img {
+    width: 25%;
+}
+
+.nimutesOfInfoPlayerPageLINK {
+    text-decoration: none;
+    color: black;
+    font-size: 73%;
+    font-weight: bolder;
+}

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../img/logoPrincipal.png';
-import backLogo from '../../img/back.svg';
-import authService from '../../services/authService';
+import logo from '../../../img/logoPrincipal.png';
+import backLogo from '../../../img/back.svg';
+import authService from '../../../services/authService';
 import axios from 'axios';
-import '../../styles/principalPage.css';
+import '../../../styles/principalPage.css';
 
 const Header = () => {
   const [teamId, setTeamId] = useState(null);
@@ -21,11 +21,14 @@ const Header = () => {
         });
     }
   }, [currentUser]);
+
   return (
     <header>
       <nav className="container">
-        <img className="logoPrincipal" src={logo} alt="Logo principal" />
-        <Link to={`/MyTeamScreen/${teamId}`}>
+        <Link to="/">
+          <img className="logoPrincipal" src={logo} alt="Logo principal" />
+        </Link>
+        <Link to={`/MatchScreen/${teamId}`}>
           <img className="logoBack" src={backLogo} alt="Tornar ..." />
         </Link>
       </nav>

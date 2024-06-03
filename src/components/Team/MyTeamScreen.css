@@ -1,0 +1,15 @@
+.defenderMyTeamPage {
+    background-color: rgb(57, 165, 254);
+}
+
+.midfielderMyTeamPage {
+    background-color: rgb(90, 254, 57);
+}
+
+.forwardMyTeamPage {
+    background-color: rgb(254, 83, 57);
+}
+
+.td-with-image-Player > img {
+    width: 25%;
+}

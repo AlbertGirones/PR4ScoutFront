@@ -11,6 +11,7 @@ const AddMatchScreen = () => {
 
   useEffect(() => {
     fetchMatches();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [teamId]);
 
   const fetchMatches = () => {
@@ -27,19 +28,18 @@ const AddMatchScreen = () => {
     axios.delete(`/api/deleteMatch/${matchId}`)
       .then(response => {
         console.log('Partido eliminado con éxito');
-        // Actualizar la lista de partidos después de eliminar uno
         fetchMatches();
       })
       .catch(error => {
         console.error('Error al eliminar el partido:', error);
       });
   };
-  
+
   return (
     <>
       <div className='msgMatchFrame'>
         <h1>Calendario de partidos</h1>
-        <Link to={`/addMatchScreen/AddMatch/${teamId}`}>
+        <Link to={`/MatchScreen/AddMatch/${teamId}`}>
           <button className='buttonAdd'>Agregar partidos</button>
         </Link>
       </div>
@@ -70,11 +70,11 @@ const AddMatchScreen = () => {
                 <div>{match.result}</div>
               ) : (
                 isToday(parse(match.day, 'dd/MM/yyyy', new Date())) ? (
-                  <Link className='applyStats'>Analizar</Link>
+                  <Link to={`/AnalyzePlayer/SetPlayer/${match.id_match}`} className='applyStats'>Analizar</Link>
                 ) : (
                   isAfter(parse(match.day, 'dd/MM/yyyy', new Date()), new Date()) ? (
                     <div className='accionMenu'>
-                      <Link className="modify"><img className="logoEditar" src={editarLogo} alt="Editar partido" /></Link>
+                      <Link to={`/MatchScreen/ModifyMatch/${teamId}`} className="modify"><img className="logoEditar" src={editarLogo} alt="Editar partido" /></Link>
                       <Link to="#" className="delete" onClick={() => handleDeleteMatch(match.id_match)}><img className="logoDelete" src={eliminarLogo} alt="Eliminar partido" /></Link>
                     </div>
                   ) : (

@@ -12,8 +12,8 @@ const Body = () => {
   const [upcomingMatch, setUpcomingMatch] = useState(null);
   const [recentMatches, setRecentMatches] = useState([]);
   const [nextRivalInfo, setNextRivalInfo] = useState([]);
-  const [scoutedPlayers, setscoutedPlayers] = useState([]);
-  const [personalPlayers, setpersonalPlayers] = useState([]);
+  const [scoutedPlayers, setScoutedPlayers] = useState([]);
+  const [personalPlayers, setPersonalPlayers] = useState([]);
   const currentUser = authService.getCurrentUser();
 
   useEffect(() => {
@@ -21,13 +21,8 @@ const Body = () => {
       axios.get(`http://localhost:5000/api/userDataRoutes/${currentUser.idUser}`)
         .then(response => {
           setData(response.data);
-          setClubId(response.data[0].clubId);
-          if (clubId) {
-            fetchLastMatches(clubId);
-            fetchScoutedPlayers(clubId);
-            fetchPersonalPlayers(clubId);
-            fetchNextTeamInfo(clubId);
-          }
+          const fetchedClubId = response.data[0].clubId;
+          setClubId(fetchedClubId);
         })
         .catch(error => {
           console.error('Error al obtener datos:', error);
@@ -35,7 +30,16 @@ const Body = () => {
     } else {
       console.error('No se pudo obtener el ID del usuario');
     }
-  }, [clubId, currentUser]);
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (clubId) {
+      fetchLastMatches(clubId);
+      fetchScoutedPlayers(clubId);
+      fetchPersonalPlayers(clubId);
+      fetchNextTeamInfo(clubId);
+    }
+  }, [clubId]);
 
   const fetchLastMatches = (clubId) => {
     axios.get(`http://localhost:5000/api/matches/upcomingAndRecent/${clubId}`)
@@ -51,20 +55,20 @@ const Body = () => {
   const fetchScoutedPlayers = (clubId) => {
     axios.get(`http://localhost:5000/api/players/getScoutedPlayers/${clubId}`)
       .then(response => {
-        setscoutedPlayers(response.data)
+        setScoutedPlayers(response.data);
       })
       .catch(error => {
-        console.error('Error al obtener los últimos partidos:', error);
+        console.error('Error al obtener los jugadores ojeados:', error);
       });
   };
 
   const fetchPersonalPlayers = (clubId) => {
     axios.get(`http://localhost:5000/api/players/getPersonalPlayers/${clubId}`)
       .then(response => {
-        setpersonalPlayers(response.data)
+        setPersonalPlayers(response.data);
       })
       .catch(error => {
-        console.error('Error al obtener los últimos partidos:', error);
+        console.error('Error al obtener los jugadores personales:', error);
       });
   };
 
@@ -74,7 +78,7 @@ const Body = () => {
         setNextRivalInfo(response.data);
       })
       .catch(error => {
-        console.error('Error al obtener la informació del siguiente rival:', error);
+        console.error('Error al obtener la información del siguiente rival:', error);
       });
   };
 
@@ -84,26 +88,25 @@ const Body = () => {
         <div className="flex-message">
           <p>Hola, {data[0].userName} {data[0].userSurname}!</p>
           <div className="flex-mssgItem">
-            <img src={data[0].image} alt="Avatar del usuario"/>
+            <img src={data[0].image} alt="Avatar del usuario" />
             <p>{data[0].teamName}</p>
           </div>
         </div>
       )}
 
       <div className="flex-container">
-        <Link to={`/addMatchScreen/${clubId}`} className="flex-items">
+        <Link to={`/MatchScreen/${clubId}`} className="flex-items">
           <h2 className='title'>Próximo Partido</h2>
-          {/* Verificar si hay al menos un partido reciente */}
           {recentMatches.length > 0 && (
             <div className='childContentDiv'>
-              <img src={recentMatches[0].rival_image} alt={recentMatches[0].rival_name} className='escudo'/>
+              <img src={recentMatches[0].rival_image} alt={recentMatches[0].rival_name} className='escudoPP' />
               <p className='onep'>{recentMatches[0].rival_name}</p>
               <p className='twop'>{recentMatches[0].match_day.slice(0, 5)}</p>
               <p className='trep'>{recentMatches[0].match_hour}</p>
               {recentMatches[0].local_or_visitor === 'Local' ? (
-                <img src={logoLocal} alt={'Local'} className='lv'/>
+                <img src={logoLocal} alt={'Local'} className='lv' />
               ) : (
-                <img src={logoVisitante} alt={'Visitante'} className='lv'/>
+                <img src={logoVisitante} alt={'Visitante'} className='lv' />
               )}
               {recentMatches[0].result === '-' ? (
                 <p className='resultN'>-</p>
@@ -112,17 +115,16 @@ const Body = () => {
               )}
             </div>
           )}
-          {/* Verificar si hay al menos dos partidos recientes */}
           {recentMatches.length > 1 && (
             <div className='childContentDiv'>
-              <img src={recentMatches[1].rival_image} alt={recentMatches[1].rival_name} className='escudo'/>
+              <img src={recentMatches[1].rival_image} alt={recentMatches[1].rival_name} className='escudoPP' />
               <p className='onep'>{recentMatches[1].rival_name}</p>
               <p className='twop'>{recentMatches[1].match_day.slice(0, 5)}</p>
               <p className='trep'>{recentMatches[1].match_hour}</p>
               {recentMatches[1].local_or_visitor === 'Local' ? (
-                <img src={logoLocal} alt={'Local'} className='lv'/>
+                <img src={logoLocal} alt={'Local'} className='lv' />
               ) : (
-                <img src={logoVisitante} alt={'Visitante'} className='lv'/>
+                <img src={logoVisitante} alt={'Visitante'} className='lv' />
               )}
               {recentMatches[1].result === '-' ? (
                 <p className='resultN'>-</p>
@@ -133,14 +135,14 @@ const Body = () => {
           )}
           {upcomingMatch ? (
             <div className='childContentDiv'>
-              <img src={upcomingMatch.rival_image} alt={upcomingMatch.rival_name} className='escudo'/>
+              <img src={upcomingMatch.rival_image} alt={upcomingMatch.rival_name} className='escudoPP' />
               <p className='onep'>{upcomingMatch.rival_name}</p>
               <p className='twop'>{upcomingMatch.match_day.slice(0, 5)}</p>
               <p className='trep'>{upcomingMatch.match_hour}</p>
               {upcomingMatch.local_or_visitor === 'Local' ? (
-                <img src={logoLocal} alt={'Local'} className='lv'/>
+                <img src={logoLocal} alt={'Local'} className='lv' />
               ) : (
-                <img src={logoVisitante} alt={'Visitante'} className='lv'/>
+                <img src={logoVisitante} alt={'Visitante'} className='lv' />
               )}
               {upcomingMatch.result === '-' ? (
                 <p className='resultN'>-</p>
@@ -156,33 +158,35 @@ const Body = () => {
           <h2 className='title'>Ojeador</h2>
           {scoutedPlayers.map((player, index) => (
             <div key={index} className='childContentDiv'>
-              <img src={player.image} alt={player.name} className='fotoPlayer'/>
+              <img src={player.image} alt={player.name} className='fotoPlayerPrincipall' />
               <p className='namePlayer'>{player.name}</p>
               <p className='position'>{player.position}</p>
-              <img src={player.escudo} alt={player.teamName} className='escudo'/>
+              <img src={player.escudo} alt={player.teamName} className='escudoPP' />
             </div>
           ))}
         </div>
         <div className="flex-items">
-          <h2 className='title'>Mis jugadores</h2>
+          <Link to={`/MyTeamScreen/${clubId}`} className="Link-flex-items">
+            <h2 className='title'>Mis jugadores</h2>
             {personalPlayers.map((player, index) => (
               <div key={index} className='childContentDiv'>
-                <img src={player.image} alt={player.name} className='fotoPlayer'/>
+                <img src={player.image} alt={player.name} className='fotoPlayerPrincipall' />
                 <p className='namePlayer2'>{player.name}</p>
                 <p className='position2'>{player.position}</p>
               </div>
             ))}
+          </Link>
         </div>
-        <div className="flex-items">
+        {/* <div className="flex-items">
           <h2 className='title'>Próximo Rival</h2>
           {nextRivalInfo.map((player, index) => (
             <div key={index} className='childContentDiv'>
-              <img src={player.image} alt={player.name} className='fotoPlayer'/>
+              <img src={player.image} alt={player.name} className='fotoPlayerPrincipall' />
               <p className='namePlayer2'>{player.name}</p>
               <p className='position2'>{player.position}</p>
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </main>
   );

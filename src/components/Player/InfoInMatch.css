@@ -1,0 +1,14 @@
+.InMatchInfo {
+    width: 90%;
+    margin: 1% auto 4% auto;
+}
+
+.infoPlayerInfoInMatch {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.infoPlayerInfoInMatch > h1 {
+    margin: auto 0 auto 4%;
+}

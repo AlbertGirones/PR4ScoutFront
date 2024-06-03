@@ -1,0 +1,27 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595 595" width="595" height="595">
+	<title>porteria-svg</title>
+	<defs>
+		<image width="330" height="330" id="img1" href="data:image/svg+xml;base64,PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KDTwhLS0gVXBsb2FkZWQgdG86IFNWRyBSZXBvLCB3d3cuc3ZncmVwby5jb20sIFRyYW5zZm9ybWVkIGJ5OiBTVkcgUmVwbyBNaXhlciBUb29scyAtLT4KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9Ii0zLjc1IC0zLjc1IDMyLjUwIDMyLjUwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0cm9rZT0iIzAwNTcxNiI+Cg08ZyBpZD0iU1ZHUmVwb19iZ0NhcnJpZXIiIHN0cm9rZS13aWR0aD0iMCIvPgoNPGcgaWQ9IlNWR1JlcG9fdHJhY2VyQ2FycmllciIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS13aWR0aD0iMC4xNSIvPgoNPGcgaWQ9IlNWR1JlcG9faWNvbkNhcnJpZXIiPiA8cGF0aCBkPSJNNS41IDEyLjVMMTAuMTY3IDE3TDE5LjUgOCIgc3Ryb2tlPSIjMGU2ZjAxIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+IDwvZz4KDTwvc3ZnPg=="/>
+	</defs>
+	<style>
+		.s0 { fill: #000000;stroke: #0e6f01;stroke-linecap: round;stroke-linejoin: round;stroke-width: 13.7 } 
+		.s1 { fill: #000000 } 
+	</style>
+	<g id="SVGRepo_bgCarrier">
+	</g>
+	<g id="SVGRepo_tracerCarrier">
+		<g id="Layer">
+			<g id="Layer">
+				<path id="Layer" class="s0" d="m82.7 414.6c7.6 0 13.8-6.1 13.8-13.7v-191.5c7.3 1.7 17.2 5.8 27.4 14.9 22 19.9 48.3 66.6 48.3 176.6 0 7.6 6.1 13.7 13.7 13.7 7.6 0 13.7-6.1 13.7-13.7 0-92.6-17.8-157.3-52.8-192.6h246.2v192.6c0 7.6 6.1 13.7 13.7 13.7 7.6 0 13.8-6.1 13.8-13.7v-192.1c7.5 1.4 18.6 5.2 30.1 15.6 22 19.8 48.3 66.5 48.3 176.5 0 7.6 6.1 13.7 13.7 13.7 7.6 0 13.7-6.1 13.7-13.7 0-97.3-19.6-163.9-58.4-197.9-17.9-15.7-35.8-20.5-47.4-21.8v-0.4h-3.8c-3.7-0.2-6.3-0.1-7.8 0h-318.9c-3.7-0.2-6.3-0.1-7.8 0h-13.2v220.1c0 7.6 6.1 13.7 13.7 13.7z"/>
+			</g>
+		</g>
+	</g>
+	<g id="SVGRepo_iconCarrier">
+		<g id="Layer">
+			<g id="Layer">
+				<path id="Layer" class="s1" d="m82.7 414.6c7.6 0 13.8-6.1 13.8-13.7v-191.5c7.3 1.7 17.2 5.8 27.4 14.9 22 19.9 48.3 66.6 48.3 176.6 0 7.6 6.1 13.7 13.7 13.7 7.6 0 13.7-6.1 13.7-13.7 0-92.6-17.8-157.3-52.8-192.6h246.2v192.6c0 7.6 6.1 13.7 13.7 13.7 7.6 0 13.8-6.1 13.8-13.7v-192.1c7.5 1.4 18.6 5.2 30.1 15.6 22 19.8 48.3 66.5 48.3 176.5 0 7.6 6.1 13.7 13.7 13.7 7.6 0 13.7-6.1 13.7-13.7 0-97.3-19.6-163.9-58.4-197.9-17.9-15.7-35.8-20.5-47.4-21.8v-0.4h-3.8c-3.7-0.2-6.3-0.1-7.8 0h-318.9c-3.7-0.2-6.3-0.1-7.8 0h-13.2v220.1c0 7.6 6.1 13.7 13.7 13.7z"/>
+			</g>
+		</g>
+		<use id="tick-svgrepo-com" href="#img1" transform="matrix(.952,0,0,.952,140,159)"/>
+	</g>
+</svg>
